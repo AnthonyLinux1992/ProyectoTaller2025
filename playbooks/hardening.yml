@@ -1,0 +1,33 @@
+---
+- name: Hardening en Ubuntu
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: Habilitar UFW y bloquear todo el tráfico entrante
+      ufw:
+        state: enabled
+        default: deny
+        logging: yes
+
+    - name: Permitir SSH
+      ufw:
+        rule: allow
+        name: OpenSSH
+
+    - name: Asegurarse que la clave pública del usuario sysadmin esté en servidor
+      authorized_key:
+        user: sysadmin
+        state: present
+        key: "{{ lookup('file', '/home/sysadmin/.ssh/id_rsa.pub') }}"
+
+    - name: Configurar autenticación solo con clave pública
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+
+    - name: Reiniciar el servicio SSH
+      service:
+        name: ssh
+        state: restarted
+
