@@ -1,0 +1,20 @@
+Responde las siguientes preguntas.
+1 - Que es Ansible y por qué es "sin agente" (agentless)?
+
+Es una herramienta de automatización que permite la gestión de configuración, implementación de aplication y orquestarción de tareas. Es "sin agente" porque no requere instalación en las máquinas que administra, solo usa SSH.
+
+2 - Diferencia entr un comando ad-hoc y un playbook
+
+Un comando ad-hoc se usa directamente en la terminal para ejecutar algo puntual, como reiniciar un servicio. Un plabook, es un archivo YAML donde defines varias tareas organizadas para automatizar procesos mas largos y repetitivos.
+
+3 - Qué es idempotencia y por qué importa en Ansible?
+
+Es la capacidad de ejectura el mismo comando varias veces sin que cambie nada si ya está en el estado deseado. Es clave en Ansible porque evita hacer cambios innecesarios y que algo se rompa sin necesidad.
+
+4 - Cómo funcionan los handlers y cuándo usarlos?
+
+Son tareas que solo se ejecutan si una acción anterior lo pide. Por ejemplo, si cambias un archivo de configuración, un handler podría reiniciar el servidio solo si hubo un cambio. Así evitas reinicios innecesarios.
+
+5 - Cómo verificar error de sintaxis en un playbook?
+
+ansible-playbook --syntax-check playbook.yaml
