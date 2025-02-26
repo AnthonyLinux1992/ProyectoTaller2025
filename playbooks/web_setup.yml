@@ -36,3 +36,4 @@
 
     - name: Reload Firewall
       command: firewall-cmd --reload
+...
